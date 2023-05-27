@@ -2,7 +2,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404, redirect
 
-from ..models import Question, Answer
+from ..models import Question, Answer, Comment
 
 
 @login_required(login_url='common:login')
@@ -29,3 +29,19 @@ def vote_answer(request, answer_id):
     else:
         answer.voter.add(request.user)
     return redirect('pybo:detail', question_id=answer.question.id)
+
+
+@login_required(login_url='common:login')
+def vote_comment(request, comment_id):
+    """
+    pybo comment 추천 등록
+    """
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user == comment.author:
+        messages.error(request, '본인이 작성한 글은 추천할수 없습니다')
+    else:
+        comment.voter.add(request.user)
+    if comment.question != None:
+        return redirect('pybo:detail', question_id=comment.question.id)
+    elif comment.answer !=None:
+        return redirect('pybo:detail', question_id=comment.answer.question.id)
