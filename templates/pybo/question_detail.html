@@ -54,6 +54,7 @@
                                     <option value="recommend" {% if so == 'recommend' %}selected{% endif %}>추천순</option>
                                 </select>
                             </div>
+                            <!--종빈-->
                             <div class="mt-3">
                                 {% for comment in comment_list %}
                                     <a name="comment_{{ comment.id }}"></a>
@@ -77,6 +78,7 @@
                                         <!--댓글추천 기능 추가 종빈-->
                                         <a href="{% url 'pybo:vote_comment' comment.id %}" class="recommend">추천
                                             : {{ comment.voter.count }}</a>
+                                        <!-- 종빈-->
 
                                     </div>
                                 {% endfor %}
@@ -190,6 +192,7 @@
                                             <!-- Comment 추천 추가 종빈-->
                                             <a href="{% url 'pybo:vote_comment' comment.id %}" class="recommend">추천
                                                 : {{ comment.voter.count }}</a>
+                                            <!-- 종빈-->
                                         </div>
                                     {% endfor %}
                                 </div>
@@ -226,6 +229,7 @@
     <form id="searchForm" method="get" action="{% url 'pybo:detail' question.id %}">
         <input type="hidden" id="page" name="page" value="{{ page }}">
         <input type="hidden" id="so" name="so" value="{{ so }}">
+    <!-- 종빈-->
     </form>
 {% endblock %}
 {% block script %}
@@ -241,7 +245,7 @@
                     location.href = $(this).data('uri');
                 }
             });
-            <!-- 정렬 및 페이지 네이션을 위한 Js-->
+            <!-- 정렬 및 페이지 네이션을 위한 Js 종빈-->
             $(".so").on('change', function () {
                 $("#so").val($(this).val());
                 $("#page").val(1);
@@ -250,6 +254,7 @@
             $(".page-link").on('click', function () {
                 $("#page").val($(this).data("page"));
                 $("#searchForm").submit();
+                <!-- 종빈-->
             });
         });
     </script>
