@@ -61,7 +61,7 @@
 
                                         <span style="white-space: pre-line;">{{ comment.content }}</span>
                                         <span>
-                                - {{ comment.author }}, {{ comment.create_date }}
+                                - {{ comment.author }}, {{ comment.create_date }},수정횟수 : {{ comment.modify_count }}
                                             {% if comment.modify_date %}
                                                 (수정:{{ comment.modify_date }})
                                             {% endif %}
@@ -175,7 +175,7 @@
                                         <div class="comment py-2 text-muted">
                                             <span style="white-space: pre-line;">{{ comment.content }}</span>
                                             <span>
-                                - {{ comment.author }}, {{ comment.create_date }}
+                                - {{ comment.author }}, {{ comment.create_date }},수정횟수 : {{ comment.modify_count }}
                                                 {% if comment.modify_date %}
                                                     (수정:{{ comment.modify_date }})
                                                 {% endif %}
@@ -223,7 +223,7 @@
         </form>
     </div>
     <!-- 파라미터 제출로 페이지 Loading 종빈-->
-    <form id="searchForm" method="get" action="{% url 'pybo:detail' question.id%}">
+    <form id="searchForm" method="get" action="{% url 'pybo:detail' question.id %}">
         <input type="hidden" id="page" name="page" value="{{ page }}">
         <input type="hidden" id="so" name="so" value="{{ so }}">
     </form>
