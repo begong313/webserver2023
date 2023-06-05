@@ -20,18 +20,18 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
+    modify_count = models.IntegerField(default=0)
     modify_date = models.DateTimeField(null=True, blank=True)
     voter = models.ManyToManyField(User, related_name='voter_answer')
-    modify_count = models.IntegerField(default=0)
+
 
 class Comment(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     content = models.TextField()
     create_date = models.DateTimeField()
     modify_date = models.DateTimeField(null=True, blank=True)
-    modify_count = models.IntegerField(default=0) ##수정횟수 시현
-
-
     question = models.ForeignKey(Question, null=True, blank=True, on_delete=models.CASCADE)
     answer = models.ForeignKey(Answer, null=True, blank=True, on_delete=models.CASCADE)
+
+    modify_count = models.IntegerField(default=0)  ##수정횟수 시현
     voter = models.ManyToManyField(User, related_name='voter_comment')

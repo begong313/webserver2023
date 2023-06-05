@@ -18,7 +18,6 @@ def question_create(request):
             question = form.save(commit=False)
             question.author = request.user  # 추가한 속성 author 적용
             question.create_date = timezone.now()
-            question.modify_count = question.modify_count + 1
             question.save()
             return redirect('pybo:index')
     else:
@@ -43,6 +42,7 @@ def question_modify(request, question_id):
             question = form.save(commit=False)
             question.author = request.user
             question.modify_date = timezone.now()  # 수정일시 저장
+            question.modify_count = question.modify_count + 1
             question.save()
             return redirect('pybo:detail', question_id=question.id)
     else:
